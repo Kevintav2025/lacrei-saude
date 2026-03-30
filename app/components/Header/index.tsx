@@ -2,82 +2,108 @@
 import styled from "styled-components";
 import Link from "next/link";
 
+// Definição de cores conforme o Design System
+const colors = {
+  primary: "#018762",
+  primaryHover: "#016b4e",
+  text: "#1f1f1f",
+  white: "#ffffff",
+  bgLight: "rgba(1, 135, 98, 0.05)"
+};
+
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
-  background-color: #ffffff;
-  border-bottom: 2px solid #018762;
+  padding: 1.5rem 5rem; /* Aumentado para dar mais "ar" ao layout */
+  background-color: ${colors.white};
+  border-bottom: 1px solid #eeeeee; /* Borda mais sutil conforme o Marsha */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02); /* Sombra leve para profundidade */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 15px;
-    padding: 15px 10px;
-    text-align: center;
+    padding: 1rem;
+    gap: 1rem;
   }
 `;
 
-const Logo = styled.h2`
-  color: #018762;
-  margin: 0;
+const LogoLink = styled(Link)`
+  text-decoration: none;
+  color: ${colors.primary};
   font-size: 1.5rem;
+  font-weight: 800; /* Peso extra para o logo */
+  letter-spacing: -0.5px;
+  
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const Nav = styled.nav`
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap; 
-  gap: 10px;
+  gap: 1rem;
 
-  a {
-    margin: 5px 10px;
-    padding: 10px 15px;
-    display: inline-block;
-    color: #018762 !important;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.95rem;
-    background-color: rgba(1, 135, 98, 0.05); 
-    border-radius: 8px;
-    transition: all 0.2s;
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+`;
 
-    &:hover {
-      background-color: rgba(1, 135, 98, 0.15);
-      transform: translateY(-2px);
-    }
+const NavLink = styled(Link)`
+  text-decoration: none;
+  color: ${colors.text};
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  transition: color 0.2s;
+
+  &:hover {
+    color: ${colors.primary};
   }
 
-  /* Estilo especial para o botão de Login/Entrar */
-  .btn-login {
-    background-color: #018762;
-    color: white !important;
+  &.btn-login {
+    background-color: ${colors.primary};
+    color: ${colors.white};
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    transition: background-color 0.2s, transform 0.1s;
+
     &:hover {
-      background-color: #016b4e;
+      background-color: ${colors.primaryHover};
+      transform: scale(1.02);
+    }
+
+    &:active {
+      transform: scale(0.98);
     }
   }
 `;
 
 export default function Header() {
   return (
-    <StyledHeader>
-      <Logo>
-        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          Lacrei Saúde
-        </Link>
-      </Logo>
-      <Nav>
-        <Link href="/">Home</Link>
-        <Link href="/profissionais">Profissionais</Link>
+    <StyledHeader role="banner">
+      <LogoLink href="/" aria-label="Lacrei Saúde - Ir para Home">
+        Lacrei Saúde
+      </LogoLink>
+      
+      <Nav aria-label="Menu principal">
+        <NavLink href="/">Home</NavLink>
+        <NavLink href="/profissionais">Profissionais</NavLink>
+        <NavLink href="/dashboard">Dashboard</NavLink>
+        <NavLink href="#">Quem Somos</NavLink>
         
-        {/* NOVO LINK: DASHBOARD */}
-        <Link href="/dashboard">Dashboard</Link>
-        
-        <Link href="#">Quem Somos</Link>
-
-        {/* BOTÃO DE LOGIN PARA FECHAR O FLUXO */}
-        <Link href="/login" className="btn-login">Entrar</Link>
+        <NavLink 
+          href="/login" 
+          className="btn-login" 
+          aria-label="Entrar na sua conta"
+        >
+          Entrar
+        </NavLink>
       </Nav>
     </StyledHeader>
   );
