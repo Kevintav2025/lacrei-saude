@@ -1,0 +1,29 @@
+/* Acessibilidade: Foco Visível */
+/* Isso garante que quem navega pelo teclado veja uma borda no elemento selecionado */
+a:focus, 
+button:focus, 
+input:focus {
+  outline: 3px solid #018762 !important; /* Verde da Lacrei */
+  outline-offset: 2px;
+}
+
+/* Garante que o scroll seja suave ao clicar em âncoras */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilo para pular para o conteúdo (opcional, mas ganha pontos) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #018762;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}

@@ -4,7 +4,6 @@ import Footer from "./components/Footer";
 import styled from "styled-components";
 import Link from "next/link";
 
-// Cores do Marsha Design System
 const colors = {
   primary: "#018762",
   primaryHover: "#016b4e",
@@ -45,6 +44,7 @@ const Title = styled.h1`
   line-height: 1.1;
   margin: 0;
   max-width: 800px;
+  letter-spacing: -1px;
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -74,6 +74,12 @@ const StyledLink = styled(Link)`
   font-weight: 700;
   box-shadow: 0 4px 15px rgba(1, 135, 98, 0.25);
   transition: all 0.3s ease;
+  outline: none;
+
+  /* AJUSTE DE ACESSIBILIDADE: Foco visível solicitado */
+  &:focus {
+    box-shadow: 0 0 0 4px ${colors.white}, 0 0 0 8px ${colors.primary};
+  }
 
   &:hover {
     background-color: ${colors.primaryHover};
@@ -88,6 +94,7 @@ const StyledLink = styled(Link)`
   @media (max-width: 480px) {
     width: 100%;
     padding: 18px 32px;
+    text-align: center;
   }
 `;
 
@@ -96,7 +103,7 @@ export default function Home() {
     <Container>
       <Header />
       
-      <Main role="main">
+      <Main>
         <Title>Cuidamos de você com respeito.</Title>
         
         <Description>
@@ -105,7 +112,7 @@ export default function Home() {
 
         <StyledLink 
           href="/profissionais" 
-          aria-label="Buscar profissionais de saúde qualificados"
+          aria-label="Ir para a página de busca de profissionais de saúde"
         >
           Buscar Profissional
         </StyledLink> 

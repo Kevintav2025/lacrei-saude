@@ -3,20 +3,17 @@ import { describe, it, expect } from 'vitest';
 import Home from './page';
 import '@testing-library/jest-dom';
 
-describe('Página Home', () => {
-  it('deve renderizar o título principal', () => {
+describe('Página Principal (Home)', () => {
+  it('deve renderizar o título principal corretamente', () => {
     render(<Home />);
-    // Usamos queryByText para evitar que o teste quebre antes do expect
-    const title = screen.queryByText(/Cuidamos/i);
+    const title = screen.getByText(/Cuidamos de você com respeito/i);
     expect(title).toBeInTheDocument();
   });
 
-  it('deve ter o link para profissionais', () => {
+  it('deve conter o link para buscar profissionais com acessibilidade', () => {
     render(<Home />);
-    // Procuramos o link apenas pelo texto contido nele, sem exigir o "name" exato do Role
-    const link = screen.queryByText(/Buscar/i);
+    const link = screen.getByRole('link', { name: /Ir para a página de busca de profissionais de saúde/i });
     expect(link).toBeInTheDocument();
-    // Verifica se o link aponta para o lugar certo
-    expect(link?.closest('a')).toHaveAttribute('href', '/profissionais');
+    expect(link).toHaveAttribute('href', '/profissionais');
   });
 });
