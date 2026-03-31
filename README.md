@@ -40,6 +40,11 @@ Para garantir a confiabilidade, foram implementados testes unitários cobrindo o
 
 **Status:** 8 testes passados com sucesso.
 ![Resultado dos Testes](/app/components/assents/teste1.png)
+## 📊 Evidências de Qualidade (Lighthouse)
+
+A aplicação foi auditada pelo Lighthouse, atingindo notas máximas em Acessibilidade, SEO e Performance, garantindo uma experiência fluida e inclusiva.
+
+![Resultado Lighthouse](/app/components/assents/lighthouse.png)
 
 ## ⚙️ Como executar
 1. **Clone o repositório:**
